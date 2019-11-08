@@ -39,7 +39,7 @@ for Ji = 1:numel(J_set)
 end
 
 % surface between bistable==smooth and stable==sharp region consists of the critical points
-%{
+
 b = 0;
 for Di = 1:numel(J_set) % kappa ebenen
     for Ji = 1:numel(J_set) % 
@@ -58,7 +58,7 @@ for Di = 1:numel(J_set) % kappa ebenen
         end
     end
 end
-%}
+
 %Valid_sol_counter_JDf = rot90(fliplr(Valid_sol_counter_JDf));
 
 figure
