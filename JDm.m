@@ -84,16 +84,3 @@ set(gca, 'ZTick', ZT, 'ZTicklabel', ZT / numel(m_set) * m_set(length(m_set)));
 saveas(gcf, fullfile(fname, 'JDm.eps'), 'epsc'); 
 saveas(gcf, 'JDm.pdf'); 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
