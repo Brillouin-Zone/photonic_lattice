@@ -14,21 +14,28 @@
  cubic_h0 = n^3 - 2*Delta*n^2 / U + (Delta^2 + kappa_h0^2 /4)*(n/U^2) - f_h0^2/U^2 == 0;
  Ecubic_r0 = expand(simplify(cubic_r0));
  Ecubic_h0 = simplify(expand(cubic_h0));
- 
+    
      
  % for delta_n small, we neglegt the cubic term,
- Ecubic_r0_dn3 = subs(Ecubic_r0, delta_n^3, 0);
- Ecubic_h0_dn3 = subs(Ecubic_h0, delta_n^3, 0);
-     solution_r0 = solve(Ecubic_r0_dn3, delta_n);
-     solution_h0 = solve(Ecubic_h0_dn3, delta_n);
+ Ecubic_r0_dn3 = subs(Ecubic_r0, delta_n^3, 0);  % equation between (41) and (42)
+ Ecubic_h0_dn3 = subs(Ecubic_h0, delta_n^3, 0);  % equation between (42) and (43) 
+     solution_r0_dn3 = solve(Ecubic_r0_dn3, delta_n);   % equation (42)
+     solution_h0_dn3 = solve(Ecubic_h0_dn3, delta_n);   % equation (43)
+            Taylor_solution_r0_dn3 = taylor(solution_r0_dn3, h, 'ExpansionPoint',0,'Order',2); % Taylor expansion at h=0 up to third order
+                % RESULT:
+                % delta n = - h*((18*2^(1/2)*U*nC^2 + 96*3^(1/2)*U*nC^(3/2))/(648*U^2*nC^3) - (2^(1/2)*(nC - 32))/(36*U*nC^2))
+                %           - (2^(1/2)*(18*2^(1/2)*U*nC^2 + 96*3^(1/2)*U*nC^(3/2)))/(36*U*nC^2)
+            Taylor_solution_h0_dn3 = taylor(solution_h0_dn3, r, 'ExpansionPoint',0,'Order',2); % Taylor expansion at r=0
+                % RESULT:
+                % delta n = - r*((2*nC - 1)/(18*U*nC^2) - (18*U*nC^2 - 6*6^(1/2)*U*nC^(3/2))/(162*U^2*nC^3))
+                %           - (18*U*nC^2 - 6*6^(1/2)*U*nC^(3/2))/(18*U*nC^2)
  
  
  % Check: for r, h =0, we should find delta_n =0
- Ecubic_r0_dn3_h0 = subs(Ecubic_r0_dn3, h, 0);
+ Ecubic_r0_dn3_h0 = subs(Ecubic_r0_dn3, h, 0);  
  Ecubic_h0_dn3_r0 = subs(Ecubic_h0_dn3, r, 0);
     solution_rh0 = solve(Ecubic_r0_dn3_h0, delta_n); % result: delta_n = 0
     solution_hr0 = solve(Ecubic_h0_dn3_r0, delta_n); % result: delta_n = 0
- 
  
  
  
